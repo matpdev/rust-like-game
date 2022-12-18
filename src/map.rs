@@ -1,7 +1,7 @@
-use rltk::{ RGB, Rltk, RandomNumberGenerator, BaseMap, Algorithm2D, Point };
-use super::{ Rect };
-use std::cmp::{ max, min };
+use super::Rect;
+use rltk::{Algorithm2D, BaseMap, Point, RandomNumberGenerator, Rltk, RGB};
 use specs::prelude::*;
+use std::cmp::{max, min};
 
 #[derive(PartialEq, Copy, Clone)]
 pub enum TileType {
@@ -53,12 +53,12 @@ impl Map {
 
     pub fn new_map_rooms_and_corridors() -> Map {
         let mut map = Map {
-            tiles: vec![TileType::Wall; 80*50],
+            tiles: vec![TileType::Wall; 80 * 50],
             rooms: Vec::new(),
             width: 80,
             height: 50,
-            revealed_tiles: vec![false; 80*50],
-            visible_tiles: vec![false; 80*50],
+            revealed_tiles: vec![false; 80 * 50],
+            visible_tiles: vec![false; 80 * 50],
         };
 
         const MAX_ROOMS: i32 = 30;

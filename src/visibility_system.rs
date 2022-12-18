@@ -29,7 +29,6 @@ impl<'a> System<'a> for VisibilitySystem {
                     |p| p.x >= 0 && p.x < map.width && p.y >= 0 && p.y < map.height
                 );
 
-                // If this is the player, reveal what they can see
                 let _p: Option<&Player> = player.get(ent);
                 if let Some(_p) = _p {
                     for t in map.visible_tiles.iter_mut() {

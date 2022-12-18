@@ -1,7 +1,7 @@
-use rltk::{ VirtualKeyCode, Rltk };
+use super::{Map, Player, Position, State, TileType, Viewshed};
+use rltk::{Rltk, VirtualKeyCode};
 use specs::prelude::*;
-use std::cmp::{ max, min };
-use super::{ Position, Player, Viewshed, TileType, State, Map };
+use std::cmp::{max, min};
 
 pub fn try_move_player(delta_x: i32, delta_y: i32, ecs: &mut World) {
     let mut positions = ecs.write_storage::<Position>();
@@ -24,25 +24,24 @@ pub fn player_input(gs: &mut State, ctx: &mut Rltk) {
     // Player movement
     match ctx.key {
         None => {} // Nothing happened
-        Some(key) =>
-            match key {
-                VirtualKeyCode::Left | VirtualKeyCode::Numpad4 | VirtualKeyCode::A => {
-                    try_move_player(-1, 0, &mut gs.ecs)
-                }
-
-                VirtualKeyCode::Right | VirtualKeyCode::Numpad6 | VirtualKeyCode::D => {
-                    try_move_player(1, 0, &mut gs.ecs)
-                }
-
-                VirtualKeyCode::Up | VirtualKeyCode::Numpad8 | VirtualKeyCode::W => {
-                    try_move_player(0, -1, &mut gs.ecs)
-                }
-
-                VirtualKeyCode::Down | VirtualKeyCode::Numpad2 | VirtualKeyCode::S => {
-                    try_move_player(0, 1, &mut gs.ecs)
-                }
-
-                _ => {}
+        Some(key) => match key {
+            VirtualKeyCode::Left | VirtualKeyCode::Numpad4 | VirtualKeyCode::A => {
+                try_move_player(-1, 0, &mut gs.ecs)
             }
+
+            VirtualKeyCode::Right | VirtualKeyCode::Numpad6 | VirtualKeyCode::D => {
+                try_move_player(1, 0, &mut gs.ecs)
+            }
+
+            VirtualKeyCode::Up | VirtualKeyCode::Numpad8 | VirtualKeyCode::W => {
+                try_move_player(0, -1, &mut gs.ecs)
+            }
+
+            VirtualKeyCode::Down | VirtualKeyCode::Numpad2 | VirtualKeyCode::S => {
+                try_move_player(0, 1, &mut gs.ecs)
+            }
+
+            _ => {}
+        },
     }
 }
